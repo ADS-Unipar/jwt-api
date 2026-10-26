@@ -265,7 +265,7 @@ jwt-api/
 | **1** | Projetos clonados e conectados (seção 2), CORS e bug do login corrigidos, modelagem das entidades com associações |
 | **2** | CRUDs de categoria, autor, livro e leitor na API, testados no Insomnia/Postman |
 | **3** | Access + refresh token com rotação, middleware de admin, empréstimo/devolução com regras e transação |
-| **4** | Front-end completo com interceptor de refresh, apresentação do grupo |
+| **4** | Front-end completo com interceptor de refresh |
 
 O que entregar:
 
@@ -295,4 +295,3 @@ O que entregar:
 - **Paginação** nas listagens (`?page=&limit=`).
 - Validação de entrada com **Joi** ou **Zod**.
 - **Swagger** com a documentação da API.
-- Testes automatizados com **Jest + Supertest** para login, refresh e empréstimo.
