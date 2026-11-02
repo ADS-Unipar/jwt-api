@@ -1,2 +1,13 @@
 JWT_SECRET=
-PORT=
+PORT=3001
+frontend_url=http://localhost:3000
+
+# Opcional. Padrão: 15m. Para o vídeo, usar 30s e mostrar a renovação automática.
+ACCESS_TOKEN_EXPIRES_IN=15m
+
+# Opcionais: dados do admin criado pelo seed quando não existe nenhum.
+# Padrão: admin@biblioteca.com / 123456
+ADMIN_NAME=
+ADMIN_USERNAME=
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
