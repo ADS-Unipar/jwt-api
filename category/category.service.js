@@ -1,11 +1,15 @@
-const Category = require('./category.model');
+const { Category } = require('../models');
+const HttpError = require('../utils/httpError');
+const pick = require('../utils/pick');
+
+const FIELDS = ['name', 'description'];
 
 const categoryService = {
     create: async (data) => {
-        return await Category.create(data);
+        return await Category.create(pick(data, FIELDS));
     },
     findAll: async () => {
-        return await Category.findAll();
+        return await Category.findAll({ order: [['name', 'ASC']] });
     },
     findById: async (id) => {
         return await Category.findByPk(id);
@@ -15,14 +19,17 @@ const categoryService = {
         if (!category) {
             return null;
         }
-        return await category.update(data);
+        return await category.update(pick(data, FIELDS));
     },
     remove: async (id) => {
         const category = await Category.findByPk(id);
         if (!category) {
             return null;
         }
-        // regra 6 (409 se tiver livros) entra quando o model Book existir
+        // Regra 6. countBooks vem do hasMany com as: 'books' (models/index.js).
+        if (await category.countBooks() > 0) {
+            throw new HttpError(409, 'Não é possível excluir: a categoria tem livros cadastrados');
+        }
         await category.destroy();
         return category;
     }

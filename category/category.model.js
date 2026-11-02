@@ -5,7 +5,11 @@ const Category = db.define('Category', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            notNull: { msg: 'O nome da categoria é obrigatório' },
+            notEmpty: { msg: 'O nome da categoria é obrigatório' }
+        }
     },
     description: {
         type: DataTypes.STRING,
