@@ -1,4 +1,5 @@
 const readerService = require('./reader.service');
+const loanService = require('../loan/loan.service');
 const foundOr404 = require('../utils/foundOr404');
 
 const NOT_FOUND = 'Leitor não encontrado';
@@ -15,6 +16,9 @@ const readerController = {
     },
     update: async (req, res) => {
         res.json(foundOr404(await readerService.update(req.params.id, req.body), NOT_FOUND));
+    },
+    findLoans: async (req, res) => {
+        res.json(foundOr404(await loanService.findByReader(req.params.id), NOT_FOUND));
     }
 };
 
