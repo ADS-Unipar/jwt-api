@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const db = require('./config/db');
+require('./models'); // registra os models e as associações antes do sync
 const express = require('express');
 const cors = require('cors');
 const authRouter = require('./auth/auth.router');
@@ -20,7 +21,11 @@ app.use('/v1/auth', authRouter);
 app.use('/v1/user', userRouter);
 app.use('/v1/categories', categoryRouter);
 
-db.sync()
-app.listen(PORT, () => {
-    console.log(`SERVIDOR RODANDO http://localhost:${PORT}`);
-});
+const start = async () => {
+    await db.sync(); // só abre a porta depois que as tabelas existem
+    app.listen(PORT, () => {
+        console.log(`SERVIDOR RODANDO http://localhost:${PORT}`);
+    });
+};
+
+start();
