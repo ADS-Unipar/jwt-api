@@ -12,8 +12,10 @@ const INCLUDE = [
 ];
 
 const parseTotalCopies = (value) => {
+    // Number(null) e Number('') dão 0: sem essa checagem, um valor vazio zeraria o total.
+    const isNumeric = typeof value === 'number' || (typeof value === 'string' && value.trim() !== '');
     const total = Number(value);
-    if (!Number.isInteger(total) || total < 0) {
+    if (!isNumeric || !Number.isInteger(total) || total < 0) {
         throw new HttpError(400, 'O total de exemplares deve ser um número inteiro, zero ou maior');
     }
     return total;
