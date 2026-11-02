@@ -10,6 +10,8 @@ const categoryRouter = require('./category/category.router');
 const authorRouter = require('./author/author.router');
 const bookRouter = require('./book/book.router');
 const readerRouter = require('./reader/reader.router');
+const loanRouter = require('./loan/loan.router');
+const reportRouter = require('./report/report.router');
 const seedAdmin = require('./user/user.seed');
 const errorHandler = require('./utils/errorHandler');
 const app = express();
@@ -28,6 +30,8 @@ app.use('/v1/categories', categoryRouter);
 app.use('/v1/authors', authorRouter);
 app.use('/v1/books', bookRouter);
 app.use('/v1/readers', readerRouter);
+app.use('/v1/loans', loanRouter);
+app.use('/v1/reports', reportRouter);
 
 app.use((req, res) => {
     res.status(404).json({ error: 'Rota não encontrada' });
