@@ -16,7 +16,10 @@ const Author = db.define('Author', {
     },
     birthDate: {
         type: DataTypes.DATEONLY,
-        allowNull: true
+        allowNull: true,
+        validate: {
+            isDate: { msg: 'Data de nascimento inválida' }
+        }
     }
 });
 
