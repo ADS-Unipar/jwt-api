@@ -3,10 +3,16 @@ const router = Router();
 
 const userController = require('./user.controller');
 const authMiddleware = require('../auth/auth.middleware');
+const isAdmin = require('../auth/isAdmin.middleware');
 
+// Gestão de atendentes: todas as rotas são só para administrador.
+router.use(authMiddleware, isAdmin);
+
+router.get('/', userController.findAll);
 router.post('/', userController.create);
-router.get('/:id', authMiddleware, userController.findById);
-router.get('/email/:email', authMiddleware, userController.findByEmail);
-router.get('/', authMiddleware, userController.findAll);
+router.get('/email/:email', userController.findByEmail);
+router.get('/:id', userController.findById);
+router.put('/:id', userController.update);
+router.patch('/:id/active', userController.setActive);
 
 module.exports = router;

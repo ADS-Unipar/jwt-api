@@ -3,12 +3,20 @@ const { DataTypes } = require('sequelize');
 const User = db.define('User', {
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notNull: { msg: 'O nome é obrigatório' },
+            notEmpty: { msg: 'O nome é obrigatório' }
+        }
     },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            notNull: { msg: 'O e-mail é obrigatório' },
+            isEmail: { msg: 'E-mail inválido' }
+        }
     },
     isAdmin: {
         type: DataTypes.BOOLEAN, // Define the isAdmin field with a boolean data type
@@ -18,7 +26,11 @@ const User = db.define('User', {
     username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            notNull: { msg: 'O nome de usuário é obrigatório' },
+            notEmpty: { msg: 'O nome de usuário é obrigatório' }
+        }
     },
     password: {
         type: DataTypes.STRING,
@@ -28,6 +40,14 @@ const User = db.define('User', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true
+    }
+}, {
+    // A senha só sai do banco quando alguém pede o escopo withPassword (o login).
+    defaultScope: {
+        attributes: { exclude: ['password'] }
+    },
+    scopes: {
+        withPassword: {}
     }
 });
 

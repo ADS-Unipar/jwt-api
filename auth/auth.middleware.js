@@ -4,7 +4,7 @@ const authMiddleware = async (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
     if (!token) {
-        return res.status(401).json({ error: 'Access denied. No token provided.' });
+        return res.status(401).json({ error: 'Acesso negado: token não informado' });
     }
 
     try {
@@ -12,7 +12,8 @@ const authMiddleware = async (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        res.status(401).json({ error: 'Invalid token.' });
+        // Tem que ser 401: é esse código que faz o front tentar renovar o token.
+        res.status(401).json({ error: 'Token inválido ou expirado' });
     }
 };
 
