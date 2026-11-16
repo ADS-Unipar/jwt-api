@@ -1,2 +1,17 @@
 JWT_SECRET=
-PORT=
+JWT_REFRESH_SECRET=
+PORT=3000
+
+# Validade do access token (formato do jsonwebtoken: 15m, 30s, 1h...). Use 30s para demonstrar o refresh.
+ACCESS_TOKEN_EXPIRES=30s
+# Validade do refresh token, em dias
+REFRESH_TOKEN_DAYS=7
+
+# Origem(ns) do front-end liberadas no CORS (separe por vírgula)
+CORS_ORIGIN=http://localhost:5173
+
+# Administrador criado automaticamente na primeira execução
+ADMIN_NAME=Administrador
+ADMIN_USERNAME=admin
+ADMIN_EMAIL=admin@biblioteca.com
+ADMIN_PASSWORD=123456
