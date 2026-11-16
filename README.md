@@ -4,6 +4,8 @@ API REST para gestão de biblioteca (categorias, autores, livros, leitores, aten
 
 Stack: Node.js 20+, Express 5, Sequelize 6, SQLite, jsonwebtoken, bcrypt.
 
+Enunciado do trabalho: [docs/ENUNCIADO.md](docs/ENUNCIADO.md).
+
 ## Instalação
 
 ```bash
